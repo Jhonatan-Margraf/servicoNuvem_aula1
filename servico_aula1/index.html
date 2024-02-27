@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <script src="conexaoViaCEP.js"> </script>
     <title>Document</title>
 </head>
 <body>
@@ -14,3 +13,34 @@
 </body>
 </html>
 
+<script>
+    function chamarServicoViaCEP() {
+        cep_digitado = document.getElementById('numero_cep')
+        
+        //alert("Olá, Você clicou no botão "Pesquisar" e o método foi invocado)
+        //alert("O número do CEP digitado foi:" + cep_digitado.value)
+
+        cep_digitado = document.getElementById('numero_cep').value;
+
+        const urlViaCEP = "https://viacep.com.br/ws/"+ cep_digitado +"/json/";
+
+        //alert(urlViaCEP);
+
+        fetch(urlViaCEP).then((response) => {
+              if (response.ok) {
+                return response.json();
+              } else {
+               alert('Resposta não é OK');
+              }
+        }
+        )
+        .then((data) =>{
+                //alert(data);
+                console.log(data);
+            })
+            .catch(error =>{
+                alert(" ALERT: Erro ao requisitar serviço em nuvem!");
+                console.error("Erro ao requisitar serviço em nuvem!");
+            });
+    }
+</script>
